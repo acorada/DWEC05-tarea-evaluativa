@@ -1,0 +1,59 @@
+
+<div class="container">
+    <form>
+        <div class="mb-3 row">
+            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="form.nombre">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="apellido" class="col-sm-2 col-form-label">Apellidos</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="apellido" id="apellido" [(ngModel)]="form.apellido">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="rango" class="col-sm-2 col-form-label">Rango de números</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="rango" id="rango" [(ngModel)]="form.rango">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="intento" class="col-sm-2 col-form-label">Intentos</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="intento" id="intento" [(ngModel)]="form.intento">
+            </div>
+        </div>
+        <button type="button" id="btnRecoge" class="btn btn-primary" (click)="recogerDatos()" [disabled]="mostrarNombre">Recoger datos</button>
+
+    </form>
+
+    <div *ngIf="mostrarNombre">
+        <hr>
+        <p class="h3">Ongi Etorri {{form.nombre}} {{form.apellido}}</p>
+        
+        <form>
+            <div class="mb-3 row">
+                <label for="adivina" class="col-sm-2 col-form-label">Adivina el número:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="adivina" id="adivina" [(ngModel)]="adivina">
+                </div>
+            </div>
+            <button type="button" id="btnAdivina" class="btn btn-primary" (click)="adivinaNumero()" [disabled]="mostrarIntentos">Enviar</button>
+        </form>
+        
+        <p>Número de intentos restantes {{intentos}}</p>
+        <p>¿Has acertado? {{acertado}}</p>
+    </div>
+    
+    <div *ngIf="mostrarIntentos">
+        <hr>
+        <ul *ngFor="let num of numerosIntroducidos; index as i">
+            <li>{{i+1}}º número introducido: {{num}}</li>
+        </ul>
+        
+        <button type="button" class="btn btn-danger" (click)="reset()">Reset</button>
+    </div>
+    
+</div>
